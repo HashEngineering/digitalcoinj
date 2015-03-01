@@ -13,11 +13,11 @@ import java.util.Map;
 public class CoinDefinition {
 
 
-    public static final String coinName = "digitalcoin";
-    public static final String coinTicker = "DGC";
-    public static final String coinURIScheme = "digitalcoin";
-    public static final String cryptsyMarketId = "26";
-    public static final String cryptsyMarketCurrency = "BTC";
+    public static final String coinName = "kobocoin";
+    public static final String coinTicker = "KOBO";
+    public static final String coinURIScheme = "kobocoin";
+    // public static final String cryptsyMarketId = "26";
+    // public static final String cryptsyMarketCurrency = "BTC";
     public static final String PATTERN_PRIVATE_KEY_START = "6";
     public static final String PATTERN_PRIVATE_KEY_START_COMPRESSED = "[Q]";
     public static final String PATTERN_PRIVATE_KEY_START_TESTNET = "9";
@@ -27,20 +27,20 @@ public class CoinDefinition {
 
     public enum CoinPrecision {
         Coins,
-        Millicoins,
+        Manilla,
     }
     public static final CoinPrecision coinPrecision = CoinPrecision.Coins;
 
 
-    public static final String BLOCKEXPLORER_BASE_URL_PROD = "http://dgc.blockr.io/";    //blockr.io
-    public static final String BLOCKEXPLORER_ADDRESS_PATH = "address/info/";             //blockr.io path
-    public static final String BLOCKEXPLORER_TRANSACTION_PATH = "tx/info/";              //blockr.io path
-    public static final String BLOCKEXPLORER_BLOCK_PATH = "block/info/";                 //blockr.io path
+    public static final String BLOCKEXPLORER_BASE_URL_PROD = "http://altcoinguys.blockexperts.com/kobo/";    //blockr.io
+    public static final String BLOCKEXPLORER_ADDRESS_PATH = "address/";             //blockr.io path
+    public static final String BLOCKEXPLORER_TRANSACTION_PATH = "tx/";              //blockr.io path
+    public static final String BLOCKEXPLORER_BLOCK_PATH = "block/";                 //blockr.io path
     public static final String BLOCKEXPLORER_BASE_URL_TEST = BLOCKEXPLORER_BASE_URL_PROD;
 
-    public static final String DONATION_ADDRESS = "DPdbL3n3Y3ypwVEvY3wABmpbjsd3AVqm5M";  //HashEngineering donation DGC address
+    public static final String DONATION_ADDRESS = "FFXsRuAAYKSz4FwkyXk9C86bCfdhpoKJ4n";  //Kobocoin donation KOBO address
 
-    public static final String UNSPENT_API_URL = "http://dgc.blockr.io/api/v1/address/unspent/";
+    public static final String UNSPENT_API_URL = "http://blockexperts.com/api?coin=kobo&action=getbalance&address=";
     public enum UnspentAPIType {
         BitEasy,
         Blockr,
@@ -49,8 +49,8 @@ public class CoinDefinition {
     public static final UnspentAPIType UnspentAPI = UnspentAPIType.Blockr;
 
     enum CoinHash {
-        SHA256,
-        scrypt,
+        X15,
+        bitblock,
     };
     public static final CoinHash coinPOWHash = CoinHash.scrypt;
 
@@ -115,15 +115,15 @@ public class CoinDefinition {
         else
             return value * 55 / 73;
     }
-    public static int spendableCoinbaseDepth = 5; //main.h: static const int COINBASE_MATURITY
-    public static final BigInteger MAX_MONEY = BigInteger.valueOf(200000000).multiply(Utils.COIN);                 //main.h:  MAX_MONEY
+    public static int spendableCoinbaseDepth = 10; //main.h: static const int COINBASE_MATURITY
+    public static final BigInteger MAX_MONEY = BigInteger.valueOf(350000000).multiply(Utils.COIN);                 //main.h:  MAX_MONEY
     //public static final String MAX_MONEY_STRING = "200000000";     //main.h:  MAX_MONEY
 
-    public static final BigInteger DEFAULT_MIN_TX_FEE = BigInteger.valueOf(10000000);   // MIN_TX_FEE
-    public static final BigInteger DUST_LIMIT = BigInteger.valueOf(1000000); //main.h CTransaction::GetMinFee        0.01 coins
+    public static final BigInteger DEFAULT_MIN_TX_FEE = BigInteger.valueOf(0000);   // MIN_TX_FEE
+    public static final BigInteger DUST_LIMIT = BigInteger.valueOf(0000); //main.h CTransaction::GetMinFee        0.01 coins
 
-    public static final int PROTOCOL_VERSION = 3000000;          //version.h PROTOCOL_VERSION
-    public static final int MIN_PROTOCOL_VERSION = 3000000;        //version.h MIN_PROTO_VERSION - eliminate 60001 which are on the wrong fork
+    public static final int PROTOCOL_VERSION = 60013;          //version.h PROTOCOL_VERSION
+    public static final int MIN_PROTOCOL_VERSION = 209;        //version.h MIN_PROTO_VERSION - eliminate 60001 which are on the wrong fork
     public static final int INIT_PROTO_VERSION = 209;            //version.h
 
     public static final int BLOCK_CURRENTVERSION = 1;   //CBlock::CURRENT_VERSION
@@ -135,47 +135,41 @@ public class CoinDefinition {
         return PROTOCOL_VERSION <= 70000;
     }
 
-    public static final int Port    = 7999;       //protocol.h GetDefaultPort(testnet=false)
-    public static final int TestPort = 17999;     //protocol.h GetDefaultPort(testnet=true)
+    public static final int Port    = 9011;       //protocol.h GetDefaultPort(testnet=false)
+    public static final int TestPort = 19011;     //protocol.h GetDefaultPort(testnet=true)
 
     //
     //  Production
     //
-    public static final int AddressHeader = 30;             //base58.h CBitcoinAddress::PUBKEY_ADDRESS
-    public static final int p2shHeader = 5;             //base58.h CBitcoinAddress::SCRIPT_ADDRESS
+    public static final int AddressHeader = 35;             //base58.h CBitcoinAddress::PUBKEY_ADDRESS
+    public static final int p2shHeader = 28;             //base58.h CBitcoinAddress::SCRIPT_ADDRESS
     public static final boolean allowBitcoinPrivateKey = true; //for backward compatibility with previous version of digitalcoin
     public static final long PacketMagic = 0xfbc0b6db;      //0xfb, 0xc0, 0xb6, 0xdb
 
     //Genesis Block Information from main.cpp: LoadBlockIndex
     static public long genesisBlockDifficultyTarget = (0x1e0ffff0L);         //main.cpp: LoadBlockIndex
-    static public long genesisBlockTime = 1367867384L;                       //main.cpp: LoadBlockIndex
-    static public long genesisBlockNonce = (672176);                         //main.cpp: LoadBlockIndex
-    static public String genesisHash = "5e039e1ca1dbf128973bf6cff98169e40a1b194c3b91463ab74956f413b2f9c8"; //main.cpp: hashGenesisBlock
+    static public long genesisBlockTime = 1421090888;                       //main.cpp: LoadBlockIndex
+    static public long genesisBlockNonce = (219702);                         //main.cpp: LoadBlockIndex
+    static public String genesisHash = "0x3519d54cd3dddf456888921b8e97c43ef6f6204b95683a45f28437d4c44153d3"; //main.cpp: hashGenesisBlock
     static public int genesisBlockValue = 50;                                                              //main.cpp: LoadBlockIndex
     //taken from the raw data of the block explorer
-    static public String genesisTxInBytes = "04ffff001d0104294469676974616c636f696e2c20412043757272656e637920666f722061204469676974616c20416765";   //"Digitalcoin, A Currency for a Digital Age"
-    static public String genesisTxOutBytes = "04a5814813115273a109cff99907ba4a05d951873dae7acb6c973d0c9e7c88911a3dbc9aa600deac241b91707e7b4ffb30ad91c8e56e695a1ddf318592988afe0a";
+    // static public String genesisTxInBytes = "04ffff001d0104294469676974616c636f696e2c20412043757272656e637920666f722061204469676974616c20416765";   //"Kobocoin, A Currency for a Digital Age"
+    // static public String genesisTxOutBytes = "04a5814813115273a109cff99907ba4a05d951873dae7acb6c973d0c9e7c88911a3dbc9aa600deac241b91707e7b4ffb30ad91c8e56e695a1ddf318592988afe0a";
 
     //net.cpp strDNSSeed
     static public String[] dnsSeeds = new String[] {
-            "dgc1.seed.nodes.mywl.lt",
-            "dgc2.seed.nodes.mywl.lt",
-            "dgc3.seed.nodes.mywl.lt",
-            "dgc4.seed.nodes.mywl.lt",
-            "digitalcoin.co",
-            "game.digitalcoin.co",
-            "dev.digitalcoin.co",
-            "178.62.28.81",
-             "178.237.35.34",
-            "dgc.kadaplace.com",
-            "54.208.77.156",
-            "68.14.170.140",
+            "178.33.126.221:9011",
+            "87.121.52.172:9011",
+            "94.23.32.118:9011",
+            "45.56.108.177:9011",
+            "46.165.209.144:9011",
+            "46.105.217.104:9011",
      };
 
     public static int minBroadcastConnections = 1;   //0 for default; we need more peers.
 
     //
-    // TestNet - digitalcoin - not tested
+    // TestNet - kobooin - not tested
     //
     public static final boolean supportsTestNet = false;
     public static final int testnetAddressHeader = 111;             //base58.h CBitcoinAddress::PUBKEY_ADDRESS_TEST
@@ -183,8 +177,8 @@ public class CoinDefinition {
     public static final long testnetPacketMagic = 0xfcc1b7dc;      //0xfc, 0xc1, 0xb7, 0xdc
     public static final String testnetGenesisHash = "5e039e1ca1dbf128973bf6cff98169e40a1b194c3b91463ab74956f413b2f9c8";
     static public long testnetGenesisBlockDifficultyTarget = (0x1e0ffff0L);         //main.cpp: LoadBlockIndex
-    static public long testnetGenesisBlockTime = 999999L;                       //main.cpp: LoadBlockIndex
-    static public long testnetGenesisBlockNonce = (99999);                         //main.cpp: LoadBlockIndex
+    static public long testnetGenesisBlockTime = 1421090889;                       //main.cpp: LoadBlockIndex
+    static public long testnetGenesisBlockNonce = (77302);                         //main.cpp: LoadBlockIndex
 
 
 
@@ -269,11 +263,11 @@ public class CoinDefinition {
     public static final String TESTNET_SATOSHI_KEY = "";
 
     /** The string returned by getId() for the main, production network where people trade things. */
-    public static final String ID_MAINNET = "org.digitalcoin.production";
+    public static final String ID_MAINNET = "org.kobocoin.production";
     /** The string returned by getId() for the testnet. */
-    public static final String ID_TESTNET = "org.digitalcoin.test";
+    public static final String ID_TESTNET = "org.kobocoin.test";
     /** Unit test network. */
-    public static final String ID_UNITTESTNET = "com.google.digitalcoin.unittest";
+    public static final String ID_UNITTESTNET = "com.google.kobocoin.unittest";
 
     //checkpoints.cpp Checkpoints::mapCheckpoints
     public static void initCheckpoints(Map<Integer, Sha256Hash> checkpoints)
