@@ -49,8 +49,10 @@ public class CoinDefinition {
     public static final UnspentAPIType UnspentAPI = UnspentAPIType.Blockr;
 
     enum CoinHash {
-        X15,
+        SHA256,
+        Scrypt
         bitblock,
+        x15
     };
     public static final CoinHash coinPOWHash = CoinHash.scrypt;
 
