@@ -50,9 +50,9 @@ public class CoinDefinition {
 
     enum CoinHash {
         SHA256,
-        Scrypt
+        Scrypt,
         bitblock,
-        x15
+        x15,
     };
     public static final CoinHash coinPOWHash = CoinHash.scrypt;
 
